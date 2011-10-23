@@ -898,6 +898,8 @@ typedef void (^ASIDataBlock)(NSData *data);
 // If you have multiple requests sharing the thread you'll need to restart the runloop when this happens
 + (NSThread *)threadForRequest:(ASIHTTPRequest *)request;
 
+- (NSError *)getASIRequestCancelledError;
+
 
 #pragma mark ===
 

@@ -720,7 +720,8 @@ static NSOperationQueue *sharedQueue = nil;
 
 - (void)cancel
 {
-    [self performSelector:@selector(cancelOnRequestThread) onThread:[[self class] threadForRequest:self] withObject:nil waitUntilDone:NO];    
+	if (!cancelled)
+		[self performSelector:@selector(cancelOnRequestThread) onThread:[[self class] threadForRequest:self] withObject:nil waitUntilDone:NO];    
 }
 
 - (void)clearDelegatesAndCancel
@@ -780,6 +781,13 @@ static NSOperationQueue *sharedQueue = nil;
 	}
 	return nil;
 }
+
+
+- (NSError *)getASIRequestCancelledError
+{
+	return ASIRequestCancelledError;
+}
+
 
 #pragma mark running a request
 
